@@ -17,10 +17,58 @@ def inicio():
 
 @app.route('/comprar')
 def compra():
+    # TODO Realizar en la API
+    try:
+        tabla = session['nombre_usuario']
+        wallet = Cartera(RUTA_PORTFOLIO, tabla)
+        cartera = wallet.obtenerCartera()
 
-    return 'Aqui se compra criptos'
+        resultado = {'status': 'success',
+                     'message': 'Compra realizada con éxito'}
+        status_code = 200
+
+        return render_template('compra.html', cartera=cartera)
+
+    except Exception as error:
+        resultado = {
+            "status": "error",
+            "message": str(error)
+        }
+        status_code = 500
+
+    return jsonify(resultado), status_code
 
 
 @app.route('/status', methods=['GET', 'POST'])
 def estado():
-    return 'Aquí se comprueba la inversion'
+    if request.method == 'GET':
+        return render_template('status.html')
+
+    if request.method == 'POST':
+        try:
+            tabla = session['nombre_usuario']
+            wallet = Cartera(RUTA_PORTFOLIO, tabla)
+            cartera = wallet.obtenerCartera()
+
+            invertido = cartera.get('EUR')
+            valorTotalCartera = wallet.valor_actual_cartera() + invertido
+            beneficio = round((valorTotalCartera - invertido)
+                              * 100 / invertido, 2)
+
+            resultado = {'status': 'success',
+                         'message': 'Estado actualizado con éxito'}
+            status_code = 200
+
+            return jsonify({'invertido': invertido,
+                            'valorTotalCartera': valorTotalCartera,
+                            'beneficio': beneficio
+                            })
+
+        except Exception as error:
+            resultado = {
+                "status": "error",
+                "message": str(error)
+            }
+            status_code = 500
+
+        return jsonify(resultado), status_code

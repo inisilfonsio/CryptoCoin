@@ -3,7 +3,7 @@ from passlib.hash import pbkdf2_sha256
 
 from . import app
 from balance.models import *
-from config import *
+from config import RUTA_PORTFOLIO, TABLA_USERS, SALDO_INICIAL_REGALO
 
 
 @app.route('/')

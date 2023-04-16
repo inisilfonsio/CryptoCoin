@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myCRYPTO</title>
+  <link rel="stylesheet" href="static/css/flat-remix.css">
+
+
+</head>
+{% block scripts%}
+<script src="/static/js/auth.js"></script>
+{% endblock scripts %}
+
+{% block contenido %}
+
+<body>
+  <h1 class="titulo-principal">myCRYPTO</h1>
+  <p class='descripcion'>
+    La plataforma en línea para gestionar tus
+    inversiones en criptomonedas de manera segura y confiable.
+  </p>
+
+  <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}">
+
+  <form class='form_sign' action='/login' method='POST'>
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario">
+    <br>
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena">
+    <p>
+      ¿Aún no tienes una cuenta? <a href="{{ url_for('nuevo') }}">Regístrate aquí</a>
+    </p>
+    <button type="submit" onclick="enviar()">{{ titulo }}</button>
+  </form>
+</body>
+
+
+{% include 'components/footer.html' %}
+{% endblock contenido %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block estilos %}
+{% endblock estilos %}
+
+{% block contenido %}
+
+<h2 class='titulo'>ESTADO DE LA INVERSION</h2>
+
+<body>
+  <form class='form-status' id='form-status' name='form-status'>
+
+    <div class="inversion">
+      <label for="invertido">Invertido:</label>
+      <output id="invertido"></output>
+      <span class="moneda euro" style="display: none;">&euro;</span>
+    </div>
+
+    <div class="total">
+      <label for="valorTotalCartera">Valor Actual:</label>
+      <output id="valorTotalCartera"></output>
+      <span class="moneda euro" style="display: none;">&euro;</span>
+    </div>
+
+    <div class="bnf">
+      <label for="beneficio">Beneficio:</label>
+      <output id="beneficio"></output>
+      <span class="moneda porcentaje" style="display: none;">%</span>
+    </div>
+
+    <button id="btn-comprobar">Comprobar</button>
+  </form>
+</body>
+
+{% block scripts%}
+<script src="/static/js/status.js"></script>
+{% endblock scripts %}
+
+{% endblock contenido %}
